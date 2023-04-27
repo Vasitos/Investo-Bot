@@ -1,8 +1,7 @@
 import yfinance as yf
 
 
-def getStock(symbol: str):
-    start_date = '2020-01-01'
+def getStock(symbol: str, start_date: str):
     return yf.download(symbol, start=start_date, progress=False)
 
 

@@ -1,1 +1,2 @@
 from .stock_recommendation import stock_router
+from .predict_closing_stock import predict_router

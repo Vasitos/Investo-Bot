@@ -1,7 +1,8 @@
 from fastapi import FastAPI
-from .routers import stock_router
+from .routers import stock_router, predict_router
 
 
 app = FastAPI(title="Investo Bot Backend", docs_url="/")
 
+app.include_router(predict_router)
 app.include_router(stock_router)

@@ -8,9 +8,9 @@ stock_router = APIRouter(prefix="/api/v1/stock",
 
 
 @stock_router.get("/{symbol}/suggest", response_model=EMAResponse)
-async def suggestions(symbol: str):
+async def suggestions(symbol: str, start_date: str = "2020-01-01"):
 
-    data = getStock(symbol)
+    data = getStock(symbol, start_date)
     movingAverage = calculateEMA(data)
     action = determineActions(data, symbol)
     
@@ -23,8 +23,8 @@ async def suggestions(symbol: str):
             }
     
 @stock_router.get("/{symbol}/history", response_model=HistoryResponse)
-async def history(symbol: str):
+async def history(symbol: str, start_date: str = "2020-01-01"):
     
-    data = getStock(symbol)
+    data = getStock(symbol, start_date)
     
     return { "history": data.to_dict() }
