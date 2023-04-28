@@ -27,7 +27,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Construir y etiquetar imagen Docker
         run: |
-          docker build -t vasitos-landing .
-          docker tag vasitos-landing vasitos/investo-bot-backend:pre-prod
+          docker build -t investo-bot .
+          docker tag investo-bot vasitos/investo-bot-backend:pre-prod
       - name: Publicar imagen Docker en Docker Hub
         run: docker push vasitos/investo-bot-backend:pre-prod
