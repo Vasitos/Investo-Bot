@@ -3,6 +3,5 @@ pydantic
 fastapi
 yfinance
 keras
-numpy
 scikit-learn
 tensorflow
