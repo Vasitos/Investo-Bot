@@ -8,9 +8,9 @@ predict_router = APIRouter(prefix="/api/v1/predict",
 
 
 @predict_router.get("/{symbol}", response_model=PredictResponse)
-async def suggestions(symbol: str, start_date: str = "2020-01-01"):
+async def suggestions(symbol: str, start_date: str = "2020-01-01", predict_days: int = 30):
 
-    closing_price, predicted_closing_price, dates = predict(symbol, start_date)
+    closing_price, predicted_closing_price, dates = predict(symbol, start_date, predict_days)
     
     return {
                 "dates": dates,

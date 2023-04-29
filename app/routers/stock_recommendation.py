@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from app.ia import getStock, calculateEMA, determineActions
-from app.schemas import EMAResponse, HistoryResponse
+from app.ia import getStock, calculateEMA, determineActions, getInfo
+from app.schemas import EMAResponse, HistoryResponse, InfoResponse
 
 
 stock_router = APIRouter(prefix="/api/v1/stock",
@@ -22,9 +22,16 @@ async def suggestions(symbol: str, start_date: str = "2020-01-01"):
                 "dates": movingAverage[0].index.tolist()
             }
     
+
 @stock_router.get("/{symbol}/history", response_model=HistoryResponse)
 async def history(symbol: str, start_date: str = "2020-01-01"):
     
     data = getStock(symbol, start_date)
     
     return { "history": data.to_dict() }
+
+
+@stock_router.get("/{symbol}/info", response_model=InfoResponse)
+async def info(symbol: str):
+
+    return { "info": getInfo(symbol) }

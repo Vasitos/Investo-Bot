@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from datetime import date
+from typing import Any
 
 
 class EMAResponse(BaseModel):
@@ -14,3 +15,7 @@ class EMAResponse(BaseModel):
 
 class HistoryResponse(BaseModel):
     history: dict[str, dict[date, float]]
+    
+
+class InfoResponse(BaseModel):
+    info: dict[str, Any]

@@ -5,7 +5,7 @@ from datetime import date, timedelta, datetime
 import keras
 
 
-def predict(symbol: str, start_date: str):
+def predict(symbol: str, start_date: str, predict_days: int):
     # Load the saved model
     saved_model = keras.models.load_model('app/model/stock_prediction_model.h5')
 
@@ -35,9 +35,9 @@ def predict(symbol: str, start_date: str):
     # Scale the predictions back to original values
     predictions = scaler.inverse_transform(predictions)
 
-    # Predict the next 5 days of closing values
+    # Predict the next 30 days of closing values
     next_predictions = []
-    for i in range(5):
+    for i in range(predict_days):
         next_prediction = saved_model.predict(np.array([new_scaled_data[-60:, 0]]).reshape(1, 60, 1))
         next_predictions.append(next_prediction)
         new_scaled_data = np.append(new_scaled_data, next_prediction, axis=0)
@@ -46,8 +46,8 @@ def predict(symbol: str, start_date: str):
     next_predictions = scaler.inverse_transform(np.array(next_predictions).reshape(-1, 1))
     
     start_date = date(*[int(date) for date in start_date.split("-")])
-    end_date = date.today() + timedelta(days=5)
+    end_date = date.today() + timedelta(days=predict_days)
 
     date_range = [start_date + timedelta(days=x) for x in range((end_date - start_date).days)]
     
-    return new_dataset[60:], next_predictions, date_range
+    return new_dataset, next_predictions, date_range
