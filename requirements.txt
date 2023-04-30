@@ -2,6 +2,7 @@ uvicorn
 pydantic
 fastapi
 yfinance
-keras
-scikit-learn
-tensorflow
+# keras
+# scikit-learn
+# tensorflow
+prophet
