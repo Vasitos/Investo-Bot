@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .routers import stock_router, predict_router
+from .routers import stock_router, predict_router, analysis_router
 
 
 app = FastAPI(title="Investo Bot Backend", docs_url="/")
@@ -22,3 +22,4 @@ app.add_middleware(
 
 app.include_router(predict_router)
 app.include_router(stock_router)
+app.include_router(analysis_router)

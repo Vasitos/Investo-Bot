@@ -6,3 +6,5 @@ yfinance
 # scikit-learn
 # tensorflow
 prophet
+GoogleNews
+textblob
